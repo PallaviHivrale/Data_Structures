@@ -1,12 +1,12 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  Write a program which search first occurrence of particular 
+//  Write a program which search Last occurrence of particular 
 //       element from singly linear linked list.
 //  
 //  Input linked list: |10|->|20|->|30|->|40|->|50|->|30|->|70|
 //  Input element: 30
 //
-//  Output: 3
+//  Output: 6
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -23,23 +23,12 @@ typedef struct node NODE;
 typedef struct node *PNODE;
 typedef struct node **PPNODE;
 
-void InsertFirst(PPNODE first, int no)
-{ 
-    PNODE newn = NULL;
-    newn = (PNODE)malloc(sizeof(NODE));
-
-    newn->data = no;
-    newn->next = *first;
-
-   
-    *first = newn;
-    
-}
 
 void InsertLast(PPNODE first, int no)
 {
-    PNODE newn = (PNODE)malloc(sizeof(NODE));
     PNODE temp = NULL;
+
+    PNODE newn = (PNODE)malloc(sizeof(NODE));
 
     newn->data = no;
     newn->next = NULL;
@@ -59,7 +48,6 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-
 void Display(PNODE first)
 {
     while(first != NULL)
@@ -70,21 +58,33 @@ void Display(PNODE first)
     printf("NULL\n");
 }
 
-int SearchFirstOcc(PNODE first, int no)
+int Count(PNODE first)
 {
+    int iCount = 0;
+
+    while(first != NULL)
+    {
+        iCount++;
+        first = first->next;
+    }
+    return iCount;
+}
+
+int SearchLastOcc(PNODE first, int no)
+{
+    int iPos = 0;
     int iCnt = 1;
 
     while(first != NULL)
     {
         if(first->data == no)
         {
-          return iCnt;
+            iPos = iCnt;   // Correct variable name
         }
         iCnt++;
-        first = first->next; 
+        first = first->next;
     }
-
-    return 0;
+    return iPos;           // Correct variable name
 }
 
 int main()
@@ -92,21 +92,21 @@ int main()
     PNODE head = NULL;
     int iRet = 0;
 
-    InsertFirst(&head,50);
-    InsertFirst(&head,40);
-    InsertFirst(&head,30);
-    InsertFirst(&head,20);
-    InsertFirst(&head,10);
-
+    InsertLast(&head,10);
+    InsertLast(&head,20);
+    InsertLast(&head,30);
+    InsertLast(&head,40);
+    InsertLast(&head,50);
     InsertLast(&head,30);
     InsertLast(&head,70);
 
     Display(head);
 
-    iRet = SearchFirstOcc(head,30);
+    iRet = SearchLastOcc(head,30);
 
-    printf("First occurrence position is : %d\n", iRet);
+    printf("Last occurrence position is : %d\n", iRet);
 
 
     return 0;
 }
+
