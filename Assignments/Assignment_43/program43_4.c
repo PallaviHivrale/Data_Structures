@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  Write a program which Display all elements which are perfect from
+//  Write a program which return second maximum element  from
 //  singly linear linked list.
 //  
-//  Input linked list: |11|->|28|->|17|->|41|->|6|->|89|
+//  Input linked list: |110|->|230|->|320|->|240|
 //
-//  Output: 6   28
+//  Output: 240
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -69,46 +69,48 @@ int Count(PNODE first)
     return iCount;
 }
 
-int DisplayPerfect(PNODE Head)
+int SecMaximum(PNODE Head)
 {
-    int iCnt = 0, iSum = 0;
-    int iNo = 0;
+    int Max = 0;
+    int SecMax = 0;
+
+    if(Head == NULL || Head->next == NULL) // LL is empty or only one node
+    {
+        return -1;
+    }
+    Max = SecMax = Head->data;
+    Head = Head->next;
 
     while(Head!=NULL)
     {
-        iNo = Head->data;
-        iSum = 0;
-
-        for(iCnt = 1; iCnt<= iNo/2; iCnt++)
+        if(Head->data>Max)
         {
-            if(iNo % iCnt == 0)
-            {
-                iSum = iSum+iCnt;
-            }
-         }
-        if(iSum == iNo)
+            SecMax = Max;
+            Max = Head->data;
+        }
+        else if(Head->data > SecMax && Head->data != Max)
         {
-            printf("%d " ,iNo);
+            SecMax = Head->data;
         }
         Head = Head->next;
     } 
-    printf("\n"); 
+    return SecMax;
 }
+
 int main()
 {
     PNODE head = NULL;
+    int iRet = 0;
 
-    InsertLast(&head, 11);
-    InsertLast(&head, 28);
-    InsertLast(&head, 17);
-    InsertLast(&head, 41);
-    InsertLast(&head, 6);
-    InsertLast(&head, 89);
+    InsertLast(&head, 110);
+    InsertLast(&head, 230);
+    InsertLast(&head, 320);
+    InsertLast(&head, 240);
 
     Display(head);
 
-    printf("perfect number are : ");
-    DisplayPerfect(head);
+    iRet = SecMaximum(head);
+    printf("second maximum element is : %d\n ",iRet);
 
     return 0;
 }

@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  Write a program which Display all elements which are perfect from
+//  Write a program which Display all elements which are prime from
 //  singly linear linked list.
 //  
-//  Input linked list: |11|->|28|->|17|->|41|->|6|->|89|
+//  Input linked list: |11|->|20|->|17|->|41|->|22|->|89|
 //
-//  Output: 6   28
+//  Output: 11  17  41  89
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -69,26 +69,32 @@ int Count(PNODE first)
     return iCount;
 }
 
-int DisplayPerfect(PNODE Head)
+int IsPrime(int no)
 {
-    int iCnt = 0, iSum = 0;
-    int iNo = 0;
+    int i = 0;
 
+    if(no<=1)
+    {
+        return 0;
+    }
+
+    for(i=2; i<= no/2; i++)
+    {
+        if(no % i == 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void DisplayPrime(PNODE Head)
+{
     while(Head!=NULL)
     {
-        iNo = Head->data;
-        iSum = 0;
-
-        for(iCnt = 1; iCnt<= iNo/2; iCnt++)
+        if(IsPrime(Head->data))
         {
-            if(iNo % iCnt == 0)
-            {
-                iSum = iSum+iCnt;
-            }
-         }
-        if(iSum == iNo)
-        {
-            printf("%d " ,iNo);
+            printf("%d ", Head->data);
         }
         Head = Head->next;
     } 
@@ -99,16 +105,16 @@ int main()
     PNODE head = NULL;
 
     InsertLast(&head, 11);
-    InsertLast(&head, 28);
+    InsertLast(&head, 20);
     InsertLast(&head, 17);
     InsertLast(&head, 41);
-    InsertLast(&head, 6);
+    InsertLast(&head, 22);
     InsertLast(&head, 89);
 
     Display(head);
 
-    printf("perfect number are : ");
-    DisplayPerfect(head);
+    printf("prime number are : ");
+    DisplayPrime(head);
 
     return 0;
 }

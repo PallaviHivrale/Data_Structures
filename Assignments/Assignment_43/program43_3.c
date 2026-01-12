@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  Write a program which Display all elements which are perfect from
+//  Write a program which return addition of all even element  from
 //  singly linear linked list.
 //  
-//  Input linked list: |11|->|28|->|17|->|41|->|6|->|89|
+//  Input linked list: |11|->|20|->|32|->|41|
 //
-//  Output: 6   28
+//  Output: 52
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -69,46 +69,34 @@ int Count(PNODE first)
     return iCount;
 }
 
-int DisplayPerfect(PNODE Head)
+int AdditionEven(PNODE Head)
 {
-    int iCnt = 0, iSum = 0;
-    int iNo = 0;
+    int Sum = 0;
 
     while(Head!=NULL)
     {
-        iNo = Head->data;
-        iSum = 0;
-
-        for(iCnt = 1; iCnt<= iNo/2; iCnt++)
+        if(Head->data % 2 == 0)
         {
-            if(iNo % iCnt == 0)
-            {
-                iSum = iSum+iCnt;
-            }
-         }
-        if(iSum == iNo)
-        {
-            printf("%d " ,iNo);
+            Sum = Sum + Head->data;
         }
         Head = Head->next;
     } 
-    printf("\n"); 
+    return Sum;
 }
 int main()
 {
     PNODE head = NULL;
+    int iRet = 0;
 
     InsertLast(&head, 11);
-    InsertLast(&head, 28);
-    InsertLast(&head, 17);
+    InsertLast(&head, 20);
+    InsertLast(&head, 32);
     InsertLast(&head, 41);
-    InsertLast(&head, 6);
-    InsertLast(&head, 89);
 
     Display(head);
 
-    printf("perfect number are : ");
-    DisplayPerfect(head);
+    iRet = AdditionEven(head);
+    printf("sum of even element are : %d\n ",iRet);
 
     return 0;
 }

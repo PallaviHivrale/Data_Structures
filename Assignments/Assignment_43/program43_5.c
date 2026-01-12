@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  Write a program which Display all elements which are perfect from
+//  Write a program which display addition of digits of element  from
 //  singly linear linked list.
 //  
-//  Input linked list: |11|->|28|->|17|->|41|->|6|->|89|
+//  Input linked list: |110|->|230|->|20|->|240|->|640|
 //
-//  Output: 6   28
+//  Output: 2   5   2   6   10
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -69,46 +69,38 @@ int Count(PNODE first)
     return iCount;
 }
 
-int DisplayPerfect(PNODE Head)
+void SumDigit(PNODE Head)
 {
-    int iCnt = 0, iSum = 0;
-    int iNo = 0;
+    int iNo = 0, iSum = 0;
 
     while(Head!=NULL)
     {
         iNo = Head->data;
         iSum = 0;
 
-        for(iCnt = 1; iCnt<= iNo/2; iCnt++)
+        while(iNo != 0)
         {
-            if(iNo % iCnt == 0)
-            {
-                iSum = iSum+iCnt;
-            }
-         }
-        if(iSum == iNo)
-        {
-            printf("%d " ,iNo);
+            iSum = iSum+(iNo%10);
+            iNo = iNo/10;
         }
+        printf("%d\t",iSum);
         Head = Head->next;
     } 
-    printf("\n"); 
 }
+
 int main()
 {
     PNODE head = NULL;
-
-    InsertLast(&head, 11);
-    InsertLast(&head, 28);
-    InsertLast(&head, 17);
-    InsertLast(&head, 41);
-    InsertLast(&head, 6);
-    InsertLast(&head, 89);
+    
+    InsertLast(&head,110);
+    InsertLast(&head,230);
+    InsertLast(&head,20);
+    InsertLast(&head,240);
+    InsertLast(&head,640);
 
     Display(head);
 
-    printf("perfect number are : ");
-    DisplayPerfect(head);
+    SumDigit(head);
 
     return 0;
 }
