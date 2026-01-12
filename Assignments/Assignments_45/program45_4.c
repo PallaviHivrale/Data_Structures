@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print only odd elements
+//  count elements greater than given number
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -17,28 +17,31 @@ typedef struct node NODE;
 typedef struct node * PNODE;
 typedef struct node ** PPNODE;
 
-void InsertLast(PPNODE Head, int no)
+
+void InsertLast(PPNODE first, int no)
 {
+    PNODE newn = NULL;
     PNODE temp = NULL;
-    PNODE newn = (PNODE)malloc(sizeof(NODE));
+
+    newn = (PNODE)malloc(sizeof(NODE));
 
     newn->data = no;
     newn->next = NULL;
-
-    if(*Head == NULL)
+    
+    if(*first == NULL)
     {
-        *Head = newn;
+        *first = newn;
     }
     else
     {
-        temp = *Head;
+        temp = *first;
 
-        while(temp->next!= NULL)
+        while(temp->next !=NULL)        
         {
             temp = temp->next;
         }
-
         temp->next = newn;
+        
     }
 }
 
@@ -52,36 +55,43 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-int DisplayOdd(PNODE Head)
+int CountGreater(PNODE head, int no)
 {
-    PNODE temp = Head;
+    PNODE temp = head;
+    int iCount = 0;
 
-    while(temp != NULL)
+    while (temp != NULL)
     {
-        if(temp->data %2 != 0)
+        if(temp->data>no)
         {
-            printf("%d ",temp->data);
-        }
+            iCount++;
+        }  
         temp = temp->next;
     }
-    printf("\n");
+    return iCount;
 }
 
 int main()
 {
     PNODE head = NULL;
+    int iRet = 0;
+    int no = 0;
 
-    InsertLast(&head,11);
-    InsertLast(&head,22);
-    InsertLast(&head,17);
-    InsertLast(&head,11);
-    InsertLast(&head,78);
+    InsertLast(&head,10);
+    InsertLast(&head,20);
+    InsertLast(&head,30);
+    InsertLast(&head,20);
+    InsertLast(&head,40);
 
-    printf("Linked list: ");
+    printf("Linked List : ");
     Display(head);
 
-    printf("odd elements:\n");
-    DisplayOdd(head);
+    printf("Enter number: ");
+    scanf("%d", &no);
+
+    iRet = CountGreater(head, no);
+    printf("Count of element greater than %d is: %d\n",no,iRet);
+    
 
     return 0;
 }
