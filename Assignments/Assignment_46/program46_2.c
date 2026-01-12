@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print elements greater than X
+//  print elements less than X
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -55,13 +55,13 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-void DisplayGreater(PNODE head, int X)
+void DisplayLess(PNODE head, int X)
 {
     PNODE temp = head;
 
     while (temp != NULL)
     {
-        if(temp->data>X)
+        if(temp->data<X)
         {
             printf("%d ",temp->data);
         }  
@@ -87,8 +87,8 @@ int main()
     printf("Enter number: ");
     scanf("%d", &X);
 
-    printf("Elements greater than %d are: ", X);
-    DisplayGreater(head, X);
+    printf("Elements less than %d are: ", X);
+    DisplayLess(head, X);
 
     return 0;
 }

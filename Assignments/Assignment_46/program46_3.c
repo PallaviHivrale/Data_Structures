@@ -1,11 +1,12 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print elements greater than X
+//  check whether list is empty (return true if list is empty)
 //
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 
 struct node
 {
@@ -55,25 +56,23 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-void DisplayGreater(PNODE head, int X)
+bool IsEmpty(PNODE head)
 {
-    PNODE temp = head;
-
-    while (temp != NULL)
+    if(head == NULL)
     {
-        if(temp->data>X)
-        {
-            printf("%d ",temp->data);
-        }  
-        temp = temp->next;
+        printf("Linked List is Empty\n");
+        return true;
     }
-    printf("\n");
+    else
+    {
+        printf("Linked List is not empty\n");
+        return false;
+    }
 }
 
 int main()
 {
     PNODE head = NULL;
-    int X   = 0;
 
     InsertLast(&head,10);
     InsertLast(&head,20);
@@ -83,12 +82,8 @@ int main()
 
     printf("Linked List : ");
     Display(head);
-
-    printf("Enter number: ");
-    scanf("%d", &X);
-
-    printf("Elements greater than %d are: ", X);
-    DisplayGreater(head, X);
-
+    
+    IsEmpty(head);
+   
     return 0;
 }

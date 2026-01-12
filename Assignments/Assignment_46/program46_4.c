@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print elements greater than X
+//  replace negative number with zero
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -55,40 +55,37 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-void DisplayGreater(PNODE head, int X)
+void ReplaceNegative(PNODE Head)
 {
-    PNODE temp = head;
+    PNODE temp = Head;
 
     while (temp != NULL)
     {
-        if(temp->data>X)
+        if(temp->data<0)
         {
-            printf("%d ",temp->data);
+            temp->data = 0;
         }  
         temp = temp->next;
     }
-    printf("\n");
 }
 
 int main()
 {
     PNODE head = NULL;
-    int X   = 0;
 
     InsertLast(&head,10);
-    InsertLast(&head,20);
+    InsertLast(&head,-20);
     InsertLast(&head,30);
-    InsertLast(&head,20);
+    InsertLast(&head,-5);
     InsertLast(&head,40);
 
-    printf("Linked List : ");
+    printf("original Linked List : ");
     Display(head);
 
-    printf("Enter number: ");
-    scanf("%d", &X);
+    ReplaceNegative(head);
 
-    printf("Elements greater than %d are: ", X);
-    DisplayGreater(head, X);
-
+    printf("Modified List:");
+    Display(head);
+    
     return 0;
 }

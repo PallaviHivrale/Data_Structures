@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print elements greater than X
+//  Increment each node value by 1
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -55,40 +55,33 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-void DisplayGreater(PNODE head, int X)
+void IncrementAll(PNODE Head)
 {
-    PNODE temp = head;
-
-    while (temp != NULL)
+    while (Head != NULL)
     {
-        if(temp->data>X)
-        {
-            printf("%d ",temp->data);
-        }  
-        temp = temp->next;
+        Head->data++;
+        Head = Head->next; 
     }
-    printf("\n");
 }
 
 int main()
 {
     PNODE head = NULL;
-    int X   = 0;
+    
 
     InsertLast(&head,10);
     InsertLast(&head,20);
     InsertLast(&head,30);
-    InsertLast(&head,20);
+    InsertLast(&head,5);
     InsertLast(&head,40);
 
-    printf("Linked List : ");
+    printf("original Linked List :\n ");
     Display(head);
 
-    printf("Enter number: ");
-    scanf("%d", &X);
+    IncrementAll(head);
 
-    printf("Elements greater than %d are: ", X);
-    DisplayGreater(head, X);
-
+    printf("After Incrementing:\n");
+    Display(head);
+    
     return 0;
 }
