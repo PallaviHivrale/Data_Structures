@@ -1,12 +1,11 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  search an element check whether a number is present
+//  count nodes containing even values
 //
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
 
 struct node
 {
@@ -46,44 +45,37 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-bool Search(PNODE Head, int no)
+int CountEven(PNODE Head)
 {
+    int Count = 0;
     PNODE temp = Head;
+
     while(temp != NULL)
     {
-        if(temp->data == no)
+        if(temp->data %2 == 0)
         {
-            return true;
+            Count++;
         }
         temp = temp->next;
     }
-    return false;
+    return Count;
 }
 
 int main()
 {
     PNODE head = NULL;
-    int no = 0;
+    int iRet = 0;
 
     InsertFirst(&head,11);
-    InsertFirst(&head,21);
-    InsertFirst(&head,51);
-    InsertFirst(&head,101);
-    InsertFirst(&head,111);
+    InsertFirst(&head,22);
+    InsertFirst(&head,17);
+    InsertFirst(&head,40);
+    InsertFirst(&head,78);
 
     Display(head);
 
-    printf("Enter element to search: ");
-    scanf("%d",&no);
-
-    if (Search(head, no))
-    {
-        printf("Element is present in linked list\n");
-    }
-    else
-    {
-        printf("Element is NOT present in linked list\n");
-    }
+    iRet =CountEven(head);
+    printf("Number of nodes with even values : %d\n",iRet);
 
     return 0;
 }

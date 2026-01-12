@@ -1,12 +1,12 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  search an element check whether a number is present
+//  count frequency of given number
+//  (count how many times a number appears)
 //
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
 
 struct node
 {
@@ -18,8 +18,9 @@ typedef struct node NODE;
 typedef struct node * PNODE;
 typedef struct node ** PPNODE;
 
-void InsertFirst(PPNODE Head, int no)
+void InsertLast(PPNODE Head, int no)
 {
+    PNODE temp = NULL;
     PNODE newn = (PNODE)malloc(sizeof(NODE));
 
     newn->data = no;
@@ -31,8 +32,14 @@ void InsertFirst(PPNODE Head, int no)
     }
     else
     {
-        newn->next = (*Head);
-        (*Head) = newn;
+        temp = *Head;
+
+        while(temp->next!= NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = newn;
     }
 }
 
@@ -46,18 +53,20 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-bool Search(PNODE Head, int no)
+int Frequency(PNODE Head, int no)
 {
+    int iCount = 0;
     PNODE temp = Head;
+
     while(temp != NULL)
     {
         if(temp->data == no)
         {
-            return true;
+            iCount++;
         }
         temp = temp->next;
     }
-    return false;
+    return iCount;
 }
 
 int main()
@@ -65,25 +74,21 @@ int main()
     PNODE head = NULL;
     int no = 0;
 
-    InsertFirst(&head,11);
-    InsertFirst(&head,21);
-    InsertFirst(&head,51);
-    InsertFirst(&head,101);
-    InsertFirst(&head,111);
+    InsertLast(&head,11);
+    InsertLast(&head,22);
+    InsertLast(&head,17);
+    InsertLast(&head,11);
+    InsertLast(&head,22);
 
+    printf("Linked list: ");
     Display(head);
 
-    printf("Enter element to search: ");
+    printf("Enter element to count frequency : ");
     scanf("%d",&no);
 
-    if (Search(head, no))
-    {
-        printf("Element is present in linked list\n");
-    }
-    else
-    {
-        printf("Element is NOT present in linked list\n");
-    }
+    int Freq = Frequency(head, no);
+    
+    printf("Frequency of element %d in the list: %d\n", no, Freq);
 
     return 0;
 }
