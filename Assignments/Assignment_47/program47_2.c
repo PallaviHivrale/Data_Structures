@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print list in reverse order
+//  count digit of each node
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -45,6 +45,36 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
+void CountDigits(PNODE Head)
+{
+    while(Head != NULL)
+    {
+        int No = Head->data;
+        int Count = 0;
+
+        if(No == 0)
+        {
+            Count = 1;
+        }
+        else
+        {
+            if(No < 0)
+            {
+                No = -No;
+            }
+
+            while(No != 0)
+            {
+                Count++;
+                No/=10;
+            }
+        }
+        printf("Number: %d, Digits: %d\n", Head->data, Count);
+
+        Head = Head->next;
+    }
+}
+
 void Display(PNODE Head)
 {
     while(Head != NULL)
@@ -55,33 +85,21 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-void DisplayReverse(PNODE Head)
-{
-    if(Head == NULL)
-    {
-        return;
-    }
-
-    DisplayReverse(Head->next);
-    printf(" |%d |->",Head->data);
-    
-}
-
 int main()
 {
     PNODE head = NULL;
     
     InsertLast(&head,10);
-    InsertLast(&head,20);
-    InsertLast(&head,30);
-    InsertLast(&head,40);
+    InsertLast(&head,200);
+    InsertLast(&head,305);
+    InsertLast(&head,40345);
     InsertLast(&head,50);
 
     printf("original Linked List :\n ");
     Display(head);
 
-    printf("Reverse Linked List:\n");
-    DisplayReverse(head);
+    printf("\nDigit Count of each node:\n");
+    CountDigits(head);
     
     return 0;
 }

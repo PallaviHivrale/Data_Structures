@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //
-//  print list in reverse order
+//   sum of digit of each node
 //
 ////////////////////////////////////////////////////////////////////
 
@@ -45,6 +45,29 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
+void SumDigits(PNODE Head)
+{
+    int iNo = 0;
+    int Sum = 0;
+
+    
+    printf("\nsum of digit of each node:\n");
+
+    while(Head != NULL)
+    {
+        iNo = Head->data;
+        Sum = 0;
+
+        while(iNo != 0)
+        {
+            Sum = Sum + (iNo % 10);
+            iNo = iNo/10;
+        }
+        printf("Number : %d  Sum of digits : %d\n", Head->data, Sum);
+        Head = Head->next;
+    }
+}
+
 void Display(PNODE Head)
 {
     while(Head != NULL)
@@ -55,33 +78,20 @@ void Display(PNODE Head)
     printf("NULL\n");
 }
 
-void DisplayReverse(PNODE Head)
-{
-    if(Head == NULL)
-    {
-        return;
-    }
-
-    DisplayReverse(Head->next);
-    printf(" |%d |->",Head->data);
-    
-}
-
 int main()
 {
     PNODE head = NULL;
     
     InsertLast(&head,10);
-    InsertLast(&head,20);
-    InsertLast(&head,30);
-    InsertLast(&head,40);
+    InsertLast(&head,200);
+    InsertLast(&head,305);
+    InsertLast(&head,403);
     InsertLast(&head,50);
 
-    printf("original Linked List :\n ");
+    
     Display(head);
 
-    printf("Reverse Linked List:\n");
-    DisplayReverse(head);
+    SumDigits(head);
     
     return 0;
 }
