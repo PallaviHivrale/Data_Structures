@@ -1,9 +1,10 @@
 ////////////////////////////////////////////////////////////////////
-// find diffrence(Max-Min)
+// Check Whether all elements are positive
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
   
 struct node
 {
@@ -41,31 +42,17 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-int Diffrence(PNODE Head)
+bool CheckAllPositive(PNODE Head)
 {
-    int iMax = 0, iMin = 0;
-    
-    if(Head == NULL)
-    {
-        return 0;
-    }
-
-    iMax = Head->data;
-    iMin = Head->data;
-
     while(Head != NULL)
     {
-        if(Head->data > iMax)
+        if(Head->data < 0)
         {
-           iMax = Head->data; 
-        }
-        if(Head->data < iMin)
-        {
-            iMin = Head->data;
+           return false; 
         }
         Head = Head->next;
     }
-    return (iMax - iMin);
+    return true;
 }
 
 void Display(PNODE Head)
@@ -81,7 +68,7 @@ void Display(PNODE Head)
 int main()
 {
     PNODE head = NULL;
-    int iRet = 0;
+    bool bRet = false;
     
     InsertLast(&head,11);
     InsertLast(&head,20);
@@ -92,8 +79,16 @@ int main()
     printf("Linked List:\n");
     Display(head);
 
-    iRet = Diffrence(head);
-    printf("Difference (Max - Min) :  %d\n", iRet);
+    bRet = CheckAllPositive(head);
+    
+    if(bRet == 1)
+    {
+        printf("All elements are positive\n");
+    }
+    else
+    {
+        printf("all elements are Not positive\n");
+    }
     
     return 0;
 }

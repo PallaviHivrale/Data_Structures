@@ -1,9 +1,10 @@
 ////////////////////////////////////////////////////////////////////
-// find diffrence(Max-Min)
+// Display element divisible by 3
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
   
 struct node
 {
@@ -41,31 +42,20 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-int Diffrence(PNODE Head)
+void DisplayDivByThree(PNODE Head)
 {
-    int iMax = 0, iMin = 0;
-    
-    if(Head == NULL)
-    {
-        return 0;
-    }
+    PNODE temp = Head;
 
-    iMax = Head->data;
-    iMin = Head->data;
-
-    while(Head != NULL)
+    printf("Elements divisible by 3: ");
+    while(temp != NULL)
     {
-        if(Head->data > iMax)
+        if(temp->data %3 == 0)
         {
-           iMax = Head->data; 
+          printf(" %d",temp->data); 
         }
-        if(Head->data < iMin)
-        {
-            iMin = Head->data;
-        }
-        Head = Head->next;
+        temp = temp->next;
     }
-    return (iMax - iMin);
+    printf("\n");
 }
 
 void Display(PNODE Head)
@@ -81,19 +71,14 @@ void Display(PNODE Head)
 int main()
 {
     PNODE head = NULL;
-    int iRet = 0;
     
-    InsertLast(&head,11);
+    InsertLast(&head,21);
     InsertLast(&head,20);
-    InsertLast(&head,31);
+    InsertLast(&head,30);
     InsertLast(&head,40);
     InsertLast(&head,55);
 
-    printf("Linked List:\n");
-    Display(head);
-
-    iRet = Diffrence(head);
-    printf("Difference (Max - Min) :  %d\n", iRet);
+    DisplayDivByThree(head);
     
     return 0;
 }

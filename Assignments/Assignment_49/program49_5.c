@@ -1,9 +1,10 @@
 ////////////////////////////////////////////////////////////////////
-// find diffrence(Max-Min)
+// count two digit number
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
   
 struct node
 {
@@ -41,31 +42,20 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-int Diffrence(PNODE Head)
+int CountTwoDigit(PNODE Head)
 {
-    int iMax = 0, iMin = 0;
-    
-    if(Head == NULL)
-    {
-        return 0;
-    }
+    PNODE temp = Head;
+    int iCount = 0;
 
-    iMax = Head->data;
-    iMin = Head->data;
-
-    while(Head != NULL)
+    while(temp != NULL)
     {
-        if(Head->data > iMax)
+        if(temp->data >10 && temp->data<=99)
         {
-           iMax = Head->data; 
+          iCount++; 
         }
-        if(Head->data < iMin)
-        {
-            iMin = Head->data;
-        }
-        Head = Head->next;
+        temp = temp->next;
     }
-    return (iMax - iMin);
+    return iCount;
 }
 
 void Display(PNODE Head)
@@ -81,19 +71,18 @@ void Display(PNODE Head)
 int main()
 {
     PNODE head = NULL;
-    int iRet = 0;
+    int iCount = 0;
     
-    InsertLast(&head,11);
+    InsertLast(&head,21);
     InsertLast(&head,20);
-    InsertLast(&head,31);
+    InsertLast(&head,105);
     InsertLast(&head,40);
-    InsertLast(&head,55);
+    InsertLast(&head,555);
 
-    printf("Linked List:\n");
     Display(head);
 
-    iRet = Diffrence(head);
-    printf("Difference (Max - Min) :  %d\n", iRet);
+    iCount = CountTwoDigit(head);
+    printf("Number of Two digit element : %d\n", iCount);
     
     return 0;
 }
