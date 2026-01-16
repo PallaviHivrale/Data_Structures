@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////
-//   Replace even number with 0
+//  Replace odd number with 1 
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
@@ -43,15 +43,15 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-void ReplaceEven(PPNODE Head)
+void ReplaceOdd(PPNODE Head)
 {
     PNODE temp = *Head;
 
     while(temp != NULL)
     {
-       if((temp->data % 2) == 0)
+       if((temp->data % 2) != 0)
        {
-        temp->data = 0;
+        temp->data = 1;
        }      
        temp = temp->next;
     }
@@ -80,7 +80,7 @@ int main()
     printf("Before replace:\n");
     Display(head);
 
-    ReplaceEven(&head);
+    ReplaceOdd(&head);
 
     printf("After Replace:\n");
     Display(head);

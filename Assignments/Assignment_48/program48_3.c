@@ -1,9 +1,10 @@
 ////////////////////////////////////////////////////////////////////
-//   Replace even number with 0
+//  Multiply Each element by 2 
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
+
 
 struct node
 {
@@ -43,17 +44,14 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-void ReplaceEven(PPNODE Head)
+void MultiplyByTwo(PPNODE Head)
 {
     PNODE temp = *Head;
 
     while(temp != NULL)
     {
-       if((temp->data % 2) == 0)
-       {
-        temp->data = 0;
-       }      
-       temp = temp->next;
+        temp->data = temp->data*2;    
+        temp = temp->next;
     }
 }
 
@@ -80,7 +78,7 @@ int main()
     printf("Before replace:\n");
     Display(head);
 
-    ReplaceEven(&head);
+    MultiplyByTwo(&head);
 
     printf("After Replace:\n");
     Display(head);

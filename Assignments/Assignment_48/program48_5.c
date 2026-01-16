@@ -1,9 +1,10 @@
 ////////////////////////////////////////////////////////////////////
-//   Replace even number with 0
+// Display element at Odd position
 ////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
+
 
 struct node
 {
@@ -43,25 +44,28 @@ void InsertLast(PPNODE first, int no)
     }
 }
 
-void ReplaceEven(PPNODE Head)
+void DisplayOddPosition(PNODE Head)
 {
-    PNODE temp = *Head;
+    PNODE temp = Head;
+    int pos = 1;
 
     while(temp != NULL)
     {
-       if((temp->data % 2) == 0)
-       {
-        temp->data = 0;
-       }      
-       temp = temp->next;
+        if(pos%2 != 0)
+        {
+            printf(" %d",temp->data);
+        }    
+        pos--;
+        temp = temp->next;
     }
+    printf("\n");
 }
 
 void Display(PNODE Head)
 {
     while(Head != NULL)
     {
-        printf(" |%d|-> ", Head->data);
+        printf("| %d|->", Head->data);
         Head = Head->next;
     }
     printf("NULL\n");
@@ -77,13 +81,11 @@ int main()
     InsertLast(&head,40);
     InsertLast(&head,55);
 
-    printf("Before replace:\n");
+    printf("Linked List:\n");
     Display(head);
 
-    ReplaceEven(&head);
-
-    printf("After Replace:\n");
-    Display(head);
+    printf("Element at odd position:");
+    DisplayOddPosition(head);
     
     return 0;
 }
